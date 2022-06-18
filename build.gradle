@@ -1,9 +1,13 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
+
+group 'eureka'
+mainClassName = "eureka.translator.Main"
+version '1.2'
 
 repositories {
     mavenCentral()
@@ -19,6 +23,18 @@ dependencies {
 
     implementation 'com.github.goxr3plus:java-google-speech-api:8.0.0'
     implementation 'com.googlecode.soundlibs:jlayer:1.0.1.4'
+}
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+
+    manifest {
+        attributes "Main-Class": mainClassName
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
 
 test {
