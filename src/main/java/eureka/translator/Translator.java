@@ -1,6 +1,9 @@
 package eureka.translator;
 
 import com.alibaba.fastjson.JSONArray;
+import com.darkprograms.speech.synthesiser.SynthesiserV2;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.advanced.AdvancedPlayer;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -26,6 +29,8 @@ public class Translator {
 
     private static final Map<String, String> LANGUAGE_MAP = new HashMap();
     public final List<String> language = List.of("English", "Polish", "Spanish", "Ukrainian", "Russian");
+
+    private final SynthesiserV2 synthesizer = new SynthesiserV2("AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw");
 
     public void init() {
         LANGUAGE_MAP.put("en", "English");
@@ -99,4 +104,19 @@ public class Translator {
         return responseStr;
     }
 
+    public void speak(String text) {
+        Thread thread = new Thread(() -> {
+            try {
+                synthesizer.setSpeed(0.75);
+
+                AdvancedPlayer player = new AdvancedPlayer(synthesizer.getMP3Data(text));
+                player.play();
+            } catch (IOException | JavaLayerException e) {
+                e.printStackTrace();
+            }
+        });
+
+        thread.setDaemon(false);
+        thread.start();
+    }
 }

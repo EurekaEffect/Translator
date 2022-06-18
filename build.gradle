@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+
+    implementation 'com.alibaba:fastjson:2.0.7'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+
+    implementation 'com.github.goxr3plus:java-google-speech-api:8.0.0'
+    implementation 'com.googlecode.soundlibs:jlayer:1.0.1.4'
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -19,6 +19,7 @@ public class Gui extends JFrame {
 
     public static JMenuBar menu = new JMenuBar();
     public static JMenu language = new JMenu("Language");
+    public static JMenuItem speech = new JMenuItem("Speech");
     public static JRadioButtonMenuItem english, polish, spanish, ukrainian, russian;
 
     public static boolean pop = false;
@@ -54,7 +55,8 @@ public class Gui extends JFrame {
                     translator.init();
 
                     try {
-                        output.setText(translator.translateText(input.getText(), "auto", getLanguage()));
+                        String translated = translator.translateText(input.getText(), "auto", getLanguage());
+                        output.setText(translated);
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
@@ -76,6 +78,11 @@ public class Gui extends JFrame {
             }
         });
 
+        speech.addActionListener(action -> {
+            Translator translator = new Translator();
+            translator.speak(output.getText());
+        });
+
         input.setLineWrap(true);
         input.setWrapStyleWord(true);
         input.setBackground(new Color(125, 150, 215));
@@ -91,6 +98,7 @@ public class Gui extends JFrame {
 
         addItems();
         menu.add(language);
+        menu.add(speech);
 
         this.setLayout(new GridLayout());
         this.add(catRenderer);
