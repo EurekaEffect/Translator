@@ -1,4 +1,4 @@
-package eureka.translator;
+package eureka.translator.utils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.darkprograms.speech.synthesiser.SynthesiserV2;

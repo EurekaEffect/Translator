@@ -1,4 +1,7 @@
-package eureka.translator;
+package eureka.translator.gui;
+
+import eureka.translator.utils.CatRenderer;
+import eureka.translator.utils.Translator;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

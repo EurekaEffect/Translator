@@ -1,5 +1,7 @@
 package eureka.translator;
 
+import eureka.translator.gui.Gui;
+
 import java.io.IOException;
 
 public class Main {
